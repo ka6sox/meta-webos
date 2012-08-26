@@ -24,7 +24,7 @@ def qt4_machine_config_flags(bb, d):
     if bb.data.getVar('MACHINE', d, True):
         this_machine = bb.data.getVar('MACHINE', d, 1)
 
-        if this_machine in ["opal", "topaz"]:
+        if this_machine in ["opal", "topaz", "tuna"]:
             return "-xplatform qws/linux-armv6-g++ -opengl -plugin-gfx-egl -DQT_QWS_CLIENTBLIT -DPALM_DEVICE -qconfig palm"
         elif this_machine == "qemux86":
             return "-xplatform qws/linux-qemux86-g++ -no-neon -no-rpath -DPALM_DEVICE -qconfig palm"
