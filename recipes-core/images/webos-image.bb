@@ -6,6 +6,6 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 PR = "r1"
 
-IMAGE_FEATURES += "webos-temp"
+IMAGE_FEATURES += "webos-temp debug-tweaks"
 
 inherit webos-image
