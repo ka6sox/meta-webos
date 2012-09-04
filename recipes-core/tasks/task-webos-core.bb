@@ -38,7 +38,6 @@ RDEPENDS_${PN} = " \
      hunspell \
      icu \
      iproute2 \
-     jpeg \
      libgcrypt \
      libgpg-error \
      libpng \
