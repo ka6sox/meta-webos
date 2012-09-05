@@ -16,6 +16,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 ALLOW_EMPTY = "1"
 
+RPROVIDES_${PN} = "task-webos-core"
+RREPLACES_${PN} = "task-webos-core"
+RCONFLICTS_${PN} = "task-webos-core"
+
 RDEPENDS_${PN} = " \
      base-files \
      base-passwd \  

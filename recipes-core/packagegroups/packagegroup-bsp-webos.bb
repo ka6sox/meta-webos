@@ -16,6 +16,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 ALLOW_EMPTY = "1"
 
+RPROVIDES_${PN} = "task-bsp-webos"
+RREPLACES_${PN} = "task-bsp-webos"
+RCONFLICTS_${PN} = "task-bsp-webos"
+
 RDEPENDS_${PN} = " \
     base-files \
     initscripts \

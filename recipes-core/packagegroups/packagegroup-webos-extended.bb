@@ -16,6 +16,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 ALLOW_EMPTY = "1"
 
+RPROVIDES_${PN} = "task-webos-extended"
+RREPLACES_${PN} = "task-webos-extended"
+RCONFLICTS_${PN} = "task-webos-extended"
+
 RDEPENDS_${PN} = " \
     adapterbase \
     browser-adapter \

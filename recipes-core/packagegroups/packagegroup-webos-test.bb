@@ -16,6 +16,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 ALLOW_EMPTY = "1"
 
+RPROVIDES_${PN} = "task-webos-test"
+RREPLACES_${PN} = "task-webos-test"
+RCONFLICTS_${PN} = "task-webos-test"
+
 RDEPENDS_${PN} = "\
      ltp \
 "
