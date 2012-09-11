@@ -33,9 +33,6 @@ OBJDIR = "${TARGET_ARCH}"
 WEBKITOUTPUTDIR = "${S}/WebKitBuild/${OBJDIR}"
 PALM_BUILD_DIR = "${WEBKITOUTPUTDIR}/Release"
 
-CXXFLAGS += "-Wl,-rpath-link,${OPIEDIR}/lib"
-CPPFLAGS += "-Wl,-rpath-link,${OPIEDIR}/lib"
-
 export STRIP_TMP="${STRIP}"
 export F77_TMP="${F77}"
 export QMAKE_MKSPEC_PATH_TMP="${QMAKE_MKSPEC_PATH}"
