@@ -27,9 +27,8 @@ SRC_URI[sha256sum] = "c60a8d2748b4c36accb46ed9479c6ee4995bd367ba06759eb499a05f98
 # Eventually, arrange for qmake to do the right thing.
 SRC_URI += "file://remove-empty-soname-arg.patch"
 
-#EXTRA_OEMAKE = "MACHINE=${MACHINE} DISTRO_TYPE=${DISTRO_TYPE} TARGET_ARCH=${TARGET_ARCH}"
 PALM_CC_OPT = "-O2"
-OBJDIR = "${MACHINE}-${TARGET_ARCH}"
+OBJDIR = "${TARGET_ARCH}"
 
 WEBKITOUTPUTDIR = "${S}/WebKitBuild/${OBJDIR}"
 PALM_BUILD_DIR = "${WEBKITOUTPUTDIR}/Release"
@@ -65,13 +64,8 @@ do_configure() {
 do_compile() {
     export STAGING_INCDIR="${STAGING_INCDIR}"
     export STAGING_LIBDIR="${STAGING_LIBDIR}"
-#    export MACHINE=${MACHINE}
 
     QMAKE_LINK_ARGS=""
-
-#    if [ "${MACHINE}" = "opal" -o "${MACHINE}" = "topaz" ]; then
-#        QMAKE_LINK_ARGS='--qmakearg="QMAKE_LINK=\"${CXX} -B ${STAGING_BINDIR_NATIVE}/../libexec/gcc/arm-none-linux-gnueabi/4.5.1/gold -Wl,-debug\""'
-#    fi
 
     WEBKITOUTPUTDIR=${WEBKITOUTPUTDIR} ${S}/Tools/Scripts/build-webkit --qt \
         --release \
