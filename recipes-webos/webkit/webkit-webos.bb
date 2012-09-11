@@ -112,8 +112,8 @@ do_install() {
     install -d ${D}${libdir}
     oe_libinstall -C ${PALM_BUILD_DIR}/lib -so libQtWebKit ${D}/${libdir}
 
-    install -d ${D}/usr/plugins/imports/QtWebKit
-    install -m 555 ${PALM_BUILD_DIR}/imports/QtWebKit/* ${D}/usr/plugins/imports/QtWebKit
+    install -d ${D}${prefix}/plugins/imports/QtWebKit
+    install -m 555 ${PALM_BUILD_DIR}/imports/QtWebKit/* ${D}${prefix}/plugins/imports/QtWebKit
 }
 
 do_makeclean() {
@@ -132,7 +132,7 @@ do_clean() {
 }
 
 FILES_${PN} += "${libdir}/libQtWebKit.so*"
-FILES_${PN} += "/usr/plugins/imports/QtWebKit/qmldir"
-FILES_${PN} += "/usr/plugins/imports/QtWebKit/libqmlwebkitplugin.so"
+FILES_${PN} += "${prefix}/plugins/imports/QtWebKit/qmldir"
+FILES_${PN} += "${prefix}/plugins/imports/QtWebKit/libqmlwebkitplugin.so"
 FILES_${PN}-dbg += "${libdir}/.debug"
-FILES_${PN}-dbg += "/usr/plugins/imports/QtWebKit/.debug"
+FILES_${PN}-dbg += "${prefix}/plugins/imports/QtWebKit/.debug"
