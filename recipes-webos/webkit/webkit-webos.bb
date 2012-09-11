@@ -59,7 +59,7 @@ export LD_TMP="${LD}"
 export QTDIR = "${WORKDIR}/../qt4-webos-*/git"
 
 do_configure() {
-:
+    :
 }
 
 do_compile() {
@@ -73,7 +73,7 @@ do_compile() {
 #        QMAKE_LINK_ARGS='--qmakearg="QMAKE_LINK=\"${CXX} -B ${STAGING_BINDIR_NATIVE}/../libexec/gcc/arm-none-linux-gnueabi/4.5.1/gold -Wl,-debug\""'
 #    fi
 
-        WEBKITOUTPUTDIR=${WEBKITOUTPUTDIR} ${S}/Tools/Scripts/build-webkit --qt \
+    WEBKITOUTPUTDIR=${WEBKITOUTPUTDIR} ${S}/Tools/Scripts/build-webkit --qt \
         --release \
         --no-video \
         --no-webgl \
@@ -117,7 +117,7 @@ do_install() {
 }
 
 do_makeclean() {
-:
+    :
 }
 
 do_clean() {
@@ -136,4 +136,3 @@ FILES_${PN} += "/usr/plugins/imports/QtWebKit/qmldir"
 FILES_${PN} += "/usr/plugins/imports/QtWebKit/libqmlwebkitplugin.so"
 FILES_${PN}-dbg += "${libdir}/.debug"
 FILES_${PN}-dbg += "/usr/plugins/imports/QtWebKit/.debug"
-
