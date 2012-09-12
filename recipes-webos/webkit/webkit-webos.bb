@@ -15,7 +15,7 @@ PR = "r2"
 # webos-component-submission.inc & webos-component-head.inc. Those 
 # values needs adjustment for future updates. 
 #
-SRC_URI = "${ISIS-PROJECT_DOWNLOAD}/WebKit/WebKit_${WEBOS_SUBMISSION}s.zip \
+SRC_URI = "${ISIS_PROJECT_DOWNLOAD}/WebKit/WebKit_${WEBOS_SUBMISSION}s.zip \
            file://webkit-lunasysmanager-unistd.patch"
 S = "${WORKDIR}/isis-project-WebKit-${SRCREV}"
 
