@@ -9,8 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d6237f3a840aef5b7880fb4e49eecfe5"
 # We want node_crypto support
 DEPENDS = "openssl"
 
-PR = "r1"
+PR = "r2"
 
+inherit pythonnative
 inherit webos_public_repo
 inherit webos_enhanced_submissions
 inherit webos_cmake
