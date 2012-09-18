@@ -14,6 +14,8 @@ DEPENDS = "freetype jpeg libpng zlib glib-2.0 nyx-lib"
 # Please update QTDIR in webkit-supplemental.bb file with the below value(r<n>), when ever it changes
 PR = "r6"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit autotools
 inherit pkgconfig
 inherit webos_submissions
