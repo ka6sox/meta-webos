@@ -12,7 +12,7 @@ SECTION = "webos/libs"
 DEPENDS = "freetype jpeg libpng zlib glib-2.0 nyx-lib"
 
 # Please update QTDIR in webkit-supplemental.bb file with the below value(r<n>), when ever it changes
-PR = "r7"
+PR = "r8"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -66,6 +66,7 @@ def qt4_machine_config_arch_lite_qpa(bb, d):
 WEBOS_GIT_TAG = "submissions/${WEBOS_SUBMISSION}"
 SRC_URI = "${OPENWEBOS_GIT_REPO}/qt;tag=${WEBOS_GIT_TAG};protocol=git \
            file://0001-Fix-build-on-x86-64.patch \
+           file://0002-webkit2-set-OUTPUT_DIR-value-if-empty.patch \
 "
 S = "${WORKDIR}/git"
 
