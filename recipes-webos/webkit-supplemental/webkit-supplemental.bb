@@ -5,14 +5,15 @@ LICENSE = "Apache-2.0"
 SECTION = "webos/libs"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 DEPENDS = "qt4-webos webkit-webos"
-PR = "r0"
+PR = "r1"
 
 inherit autotools
 inherit webos_public_repo
 inherit webos_submissions
 
 WEBOS_GIT_TAG = "${WEBOS_SUBMISSION}"
-SRC_URI = "${ISIS_PROJECT_GIT_REPO}/WebKitSupplemental;tag=${WEBOS_GIT_TAG};protocol=git"
+SRC_URI = "${ISIS_PROJECT_GIT_REPO}/WebKitSupplemental;tag=${WEBOS_GIT_TAG};protocol=git \
+"
 S = "${WORKDIR}/git"
 
 PALM_CC_OPT = "-O2"
@@ -37,11 +38,14 @@ export CXXFLAGS_TMP="${CXXFLAGS}"
 export OBJDUMP_TMP="${OBJDUMP}"
 export LD_TMP="${LD}"
 export QMAKE="${STAGING_BINDIR_NATIVE}/qmake-palm"
-# The QTDIR needs to be changed everytime qt4-webos recipe revision number(PR) changes
-# Also, it's known to cause problems when shared state for qt4-webos is used instead of a fresh build
-export QTDIR="${WORKDIR}/../qt4-webos-${PREFERRED_VERSION_qt4-webos}-r8/qt-build-${MACHINE}"
+export QTDIR="${WORKDIR}/qt4-webos"
 
 do_configure() {
+    # .qmake.cache is not part of qt4-webos checkout, so let's try to create fake one, pointing to your stored stuff
+    mkdir -p "${QTDIR}"
+    echo "QT_SOURCE_TREE = \$\$quote(${STAGING_DIR_HOST}/usr/src/qt4-webos/git)" > ${QTDIR}/.qmake.cache
+    echo "QT_BUILD_TREE = \$\$quote(${STAGING_DIR_HOST}/usr/src/qt4-webos/build)" >> ${QTDIR}/.qmake.cache
+
     export STAGING_DIR="${STAGING_DIR}"
     export STAGING_INCDIR="${STAGING_INCDIR}"
     export STAGING_LIBDIR="${STAGING_LIBDIR}"
