@@ -11,8 +11,7 @@ SECTION = "webos/libs"
 
 DEPENDS = "freetype jpeg libpng zlib glib-2.0 nyx-lib"
 
-# Please update QTDIR in webkit-supplemental.bb file with the below value(r<n>), when ever it changes
-PR = "r8"
+PR = "r9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -69,6 +68,7 @@ SRC_URI = "${OPENWEBOS_GIT_REPO}/qt;tag=${WEBOS_GIT_TAG};protocol=git \
 S = "${WORKDIR}/git"
 
 PALM_BUILD_DIR = "${S}/../qt-build-${MACHINE}"
+QT4_STAGING_BUILD_DIR = "/usr/src/qt4-webos"
 
 export STRIP_TMP="${STRIP}"
 export F77_TMP="${F77}"
@@ -207,6 +207,21 @@ do_install() {
 }
 
 do_install_append() {
+    # work around for building webkit-supplemental without qt4-webos BUILDDIR
+    install -d ${D}${QT4_STAGING_BUILD_DIR}/git/src/gui
+    cp -ra ${S}/src/gui ${D}${QT4_STAGING_BUILD_DIR}/git/src
+    install -d ${D}${QT4_STAGING_BUILD_DIR}/git/src/corelib
+    cp -ra ${S}/src/corelib ${D}${QT4_STAGING_BUILD_DIR}/git/src
+
+    install -d ${D}${QT4_STAGING_BUILD_DIR}/git/src/3rdparty
+    cp -ra ${S}/src/3rdparty/harfbuzz ${D}${QT4_STAGING_BUILD_DIR}/git/src/3rdparty
+    install -d ${D}${QT4_STAGING_BUILD_DIR}/git/src/3rdparty/webkit/
+    cp -ra ${S}/src/3rdparty/webkit/include ${D}${QT4_STAGING_BUILD_DIR}/git/src/3rdparty/webkit/
+
+    install -d ${D}${QT4_STAGING_BUILD_DIR}/build
+    cp -ra ${PALM_BUILD_DIR}/include/ ${D}${QT4_STAGING_BUILD_DIR}/build
+
+
     oe_libinstall -C ${PALM_BUILD_DIR}/lib/ -so libQtSql ${D}/usr/lib
     oe_libinstall -C ${PALM_BUILD_DIR}/lib/ -so libQtDeclarative ${D}/usr/lib
     oe_libinstall -C ${PALM_BUILD_DIR}/lib/ -so libQtScript ${D}/usr/lib
@@ -224,9 +239,16 @@ do_install_append() {
     fi
 }
 
+sysroot_stage_all_append() {
+        sysroot_stage_dir ${D}${QT4_STAGING_BUILD_DIR} ${SYSROOT_DESTDIR}${QT4_STAGING_BUILD_DIR}
+}
+
+PACKAGES += "${PN}-buildsrc"
+
 FILES_${PN} += "/usr/plugins"
 FILES_${PN}-dbg += "/usr/plugins/gfxdrivers/.debug"
 FILES_${PN}-dbg += "/usr/plugins/imageformats/.debug"
 FILES_${PN}-dbg += "/usr/plugins/platforms/.debug"
 FILES_${PN}-dbg += "/usr/plugins/imageformats/.debug"
 FILES_${PN}-dbg += "/usr/plugins/imports/Qt/labs/shaders/.debug"
+FILES_${PN}-buildsrc += "${QT4_STAGING_BUILD_DIR}"
