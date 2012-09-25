@@ -107,21 +107,6 @@ do_install() {
     install -m 555 ${PALM_BUILD_DIR}/imports/QtWebKit/* ${D}${prefix}/plugins/imports/QtWebKit
 }
 
-do_makeclean() {
-    :
-}
-
-do_clean() {
-    if [ -d ${WEBKITOUTPUTDIR} ]; then
-        WEBKITOUTPUTDIR=${WEBKITOUTPUTDIR} ${S}/Tools/Scripts/build-webkit --qt \
-            --release \
-            --clean \
-            --qmake="${STAGING_BINDIR_NATIVE}/qmake-palm"
-
-        rm -rf ${WEBKITOUTPUTDIR}
-    fi
-}
-
 FILES_${PN} += "${libdir}/libQtWebKit.so*"
 FILES_${PN} += "${prefix}/plugins/imports/QtWebKit/qmldir"
 FILES_${PN} += "${prefix}/plugins/imports/QtWebKit/libqmlwebkitplugin.so"
