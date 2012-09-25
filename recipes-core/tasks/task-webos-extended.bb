@@ -86,7 +86,3 @@ RDEPENDS_${PN} = " \
     webos-shutdownscripts \
 "
 #        serviceinstaller (todo)
-
-DEPENDS_${PN} = " \
-     cmake-modules-webos-native \
-"

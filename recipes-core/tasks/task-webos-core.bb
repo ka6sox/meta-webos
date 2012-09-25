@@ -70,9 +70,3 @@ RDEPENDS_${PN} = " \
      yajl \
      zlib \
 "
-
-DEPENDS_${PN} = " \
-     intltool-native \
-     genext2fs-native \
-     pkgconfig-native \
-"
