@@ -52,7 +52,7 @@ export TARGET_CPPFLAGS_TMP="${TARGET_CPPFLAGS}"
 export CXXFLAGS_TMP="${CXXFLAGS}"
 export OBJDUMP_TMP="${OBJDUMP}"
 export LD_TMP="${LD}"
-export QTDIR = "${WORKDIR}/../qt4-webos-*/git"
+export QTDIR="${STAGING_DIR_HOST}/usr/src/qt4-webos"
 
 do_configure() {
     :
