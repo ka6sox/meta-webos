@@ -13,6 +13,39 @@ SRC_URI = "git://github.com/webOS-ports/qt.git;branch=rebased-v4.8.3-no-palm-too
 SRCREV = "0c7691fb6a77790cf72b2bdb08ba98c953f2ae37"
 S = "${WORKDIR}/git"
 
+##### patch to fix this in oe-core sent
+QT_CONFIG_FLAGS += "-release -no-cups -reduce-relocations \
+                    -shared -no-nas-sound -no-nis \
+                    -system-libjpeg -system-libpng -system-libtiff -system-zlib \
+                    -no-pch -stl -glib \
+                    -no-rpath -silent \
+                    ${QT_DBUS} \
+                    ${QT_QT3SUPPORT} \
+                    ${QT_WEBKIT} \
+                    ${QT_PHONON} \
+                    ${QT_XML} \
+                    ${QT_MULTIMEDIA} \
+                    ${QT_SQL_DRIVER_FLAGS} \
+                    ${QT_DISTRO_FLAGS} \
+                    ${QT_GLFLAGS}"
+
+QT_EMBEDDED_FLAGS ?= " \
+    -embedded $QT_ARCH \
+    -qtlibinfix ${QT_LIBINFIX} \
+"
+QT_EMBEDDED_EXTRA_FLAGS ?= " \
+    -plugin-gfx-transformed -plugin-gfx-qvfb -plugin-gfx-vnc -plugin-gfx-directfb \
+    -plugin-mouse-tslib -qt-mouse-pc -qt-mouse-qvfb -qt-mouse-linuxinput \
+    -qt-kbd-tty \
+"
+QT_EMBEDDED_KEYPAD_FLAGS ?= " \
+    -DQT_KEYPAD_NAVIGATION \
+"
+
+QT_CONFIG_FLAGS += "${QT_EMBEDDED_FLAGS} ${QT_EMBEDDED_EXTRA_FLAGS} ${QT_EMBEDDED_KEYPAD_FLAGS}"
+
+##### patch to fix this in oe-core sent
+
 PROVIDES += "qt4-webos"
 
 DEPENDS += "nyx-lib"
@@ -41,6 +74,8 @@ QT_MULTIMEDIA = " \
   -no-audio-backend \
   -no-gstreamer \
 "
+QT_EMBEDDED_EXTRA_FLAGS = ""
+QT_EMBEDDED_KEYPAD_FLAGS = ""
 
 # per arch flags for opengl
 QT_GLFLAGS = " \
