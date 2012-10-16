@@ -131,6 +131,9 @@ QT_DISTRO_FLAGS = " \
   ${QT_NEON} \
   ${QT_DEVICE_FLAGS} \
   ${QT_WEBOS_FLAGS} \
+  -nomake examples \
+  -nomake demos \
+  -nomake tools \
 "
 # -force-pkg-config
 # qemux86 -no-rpath ???
