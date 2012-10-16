@@ -6,3 +6,6 @@ do_install_append() {
   ln -s rcc ${D}${bindir}/rcc-palm
   ln -s qmake2 ${D}${bindir}/qmake-palm
 }
+
+# replace broken qmake-webos-native with this one
+PROVIDES += "qmake-webos-native"
