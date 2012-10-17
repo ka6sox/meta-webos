@@ -14,6 +14,7 @@ inherit webos_qmake
 inherit webos_submissions
 inherit webos_library
 inherit webos_machine_dep
+inherit qmake2
 
 #
 # Webkit source is identified by WEBOS_SUBMISSION and SRCREV defined in
@@ -57,7 +58,7 @@ do_compile() {
         --only-webkit \
         --no-webkit2 \
         --makeargs="${PARALLEL_MAKE}" \
-        --qmake="${QMAKE}" \
+        --qmake="${QMAKE} -spec ${QMAKESPEC}"\
         --qmakearg="DEFINES+=QT_SHARED" \
         --qmakearg="DEFINES+=PALM_DEVICE" \
         --qmakearg="DEFINES+=ENABLE_PALM_SERVICE_BRIDGE=1" \
